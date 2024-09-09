@@ -28,6 +28,12 @@ class Config{
   public static readonly debugMode: boolean = false;
 
   /**
+   * 一回のリクエストで配信される画像枚数
+   * 大きすぎる値にしないでください
+   */
+  public static readonly getPageLimit = 3;
+
+  /**
    * APIKeyを取得します
    * isUseApiKeyの値が偽でも設定されているtokenから生成されます
    */
