@@ -18,8 +18,14 @@ class Config{
   /**
    * アーカイブパス
    * この値のパスが公開されます
+   * フルパスを指定してください
    */
   public static readonly archivePath: string = "/archive";
+
+  /**
+   * デバッグモード
+   */
+  public static readonly debugMode: boolean = false;
 
   /**
    * APIKeyを取得します
