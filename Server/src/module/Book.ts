@@ -1,14 +1,17 @@
 import path from "path";
 import Zip, { IZipEntry } from "adm-zip";
 
+/**
+ * 書籍の管理
+ */
 class Book{
   /**
    * 格納されているファイルのエントリー配列
    */
-  public files: IZipEntry[];
+  private files: IZipEntry[];
 
   /**
-   * アーカイブファイルのパス
+   * 書籍ファイルのパス
    */
   public readonly path: string;
 
