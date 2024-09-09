@@ -14,7 +14,7 @@ class Log{
    * 情報ログを表示
    */
   public static info(message: string): void{
-    console.log(`\x1b[32m${this.getDate()} [INFO] ${message}\x1b[39m`);
+    console.info(`\x1b[32m${this.getDate()} [INFO] ${message}\x1b[39m`);
   }
 
   /**
