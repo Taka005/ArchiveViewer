@@ -39,10 +39,10 @@ class Series{
     this.title = target[0];
     this.subtitle = target[1]||null;
 
-    const files: string[] = fs.readdirSync(this.path);
+    const files: string[] = fs.readdirSync(this.path,{ encoding: "utf8" });
     if(!files[0]) throw new Error("書籍が存在しません");
 
-    this.books = files.map(file=>new Book(file));
+    this.books = files.map(file=>new Book(path.join(dirPath,file)));
   }
 
   /**
@@ -57,6 +57,12 @@ class Series{
    */
   public get thumbnail(): Buffer{
     return this.books[0].thumbnail;
+  }
+
+  public getBook(valume: number): Book{
+    if(valume <= 0||valume > this.bookCount) throw new Error("存在しない書籍です");
+
+    return this.books[valume - 1];
   }
 }
 
