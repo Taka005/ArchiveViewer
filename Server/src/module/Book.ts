@@ -42,6 +42,16 @@ class Book{
     return this.files.length;
   }
 
+  /**
+   * サムネイル
+   */
+  public get thumbnail(): Buffer{
+    return this.getPageData(1);
+  }
+
+  /**
+   * 指定したページの画像バッファを取得します
+   */
   public getPageData(page: number): Buffer{
     if(page <= 0||page > this.pageCount) throw new Error("存在しないページです");
 
