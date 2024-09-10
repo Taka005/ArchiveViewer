@@ -7,7 +7,7 @@ import Page from "./Page";
  */
 class Book{
   /**
-   * 格納されているファイルのエントリー配列
+   * 格納されているページの配列
    */
   private pages: Page[];
 
@@ -44,6 +44,14 @@ class Book{
    */
   public get pageCount(): number{
     return this.pages.length;
+  }
+
+  /**
+   * 書籍のサイズ(Byte)
+   * この値は画像ファイルのサイズの合計です
+   */
+  public get size(): number{
+    return this.pages.reduce((total,page)=>total+page.size,0);
   }
 
   /**

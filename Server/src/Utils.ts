@@ -11,6 +11,24 @@ class Utils{
 
     return hash.digest("hex");
   }
+
+  /**
+   * 書籍IDに変換します
+   */
+  public static toSeriesId(title: string,subtitle: string | null): string{
+    const name: string = this.toSeriesName(title,subtitle);
+
+    return this.toHash(name);
+  }
+
+  /**
+   * 書籍名に変換します
+   */
+  public static toSeriesName(title: string,subtitle: string | null): string{
+    const subtitleStr: string = subtitle ? `-${subtitle}` : "";
+  
+    return `${title}${subtitleStr}`;
+  }
 }
 
 export default Utils;

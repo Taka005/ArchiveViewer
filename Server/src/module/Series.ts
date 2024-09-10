@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs";
 import Book from "./Book";
 import Config from "../Config";
+import Utils from "../Utils";
 
 /**
  * シリーズの管理
@@ -11,6 +12,19 @@ class Series{
    * 書籍ディレクトリへのパス
    */
   public readonly path: string;
+
+  /**
+   * 書籍名
+   * title-subtitleの値です
+   * subtitleが存在しない場合はtitleのみになります
+   */
+  public readonly name: string;
+
+  /**
+   * 書籍ID
+   * 書籍名をSHA256でハッシュ化した値です
+   */
+  public readonly id: string;
   
   /**
    * 書籍タイトル
@@ -43,6 +57,9 @@ class Series{
     
     this.title = target[0];
     this.subtitle = target[1]||null;
+
+    this.name = Utils.toSeriesName(this.title,this.subtitle);
+    this.id = Utils.toSeriesId(this.title,this.subtitle);
 
     const files: string[] = fs.readdirSync(this.path,{ encoding: "utf8" });
     if(!files[0]) throw new Error("書籍が存在しません");

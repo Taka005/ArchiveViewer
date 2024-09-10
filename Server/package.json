@@ -4,7 +4,7 @@
   "description": "書籍を閲覧するためのサーバー",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx tsx src/index.ts"
   },
   "repository": {
     "type": "git",

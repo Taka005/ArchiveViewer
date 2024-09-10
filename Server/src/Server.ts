@@ -14,6 +14,12 @@ class Server{
    * サーバーを起動します
    */
   public run(): void{
+    if(Config.isUseApiKey){
+      Log.info(`API Key: ${this.getApiKey()}`);
+    }else{
+      Log.warn("Config.isUseApiKeyが無効に設定されているため、全てのユーザーが利用可能です");
+    }
+
     this.app.listen(Config.port,()=>{
       Log.info(`${Config.port}番ポートで起動しました`);
     });

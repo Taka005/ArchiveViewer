@@ -22,17 +22,18 @@ class Archive{
   }
 
   /**
-   * 指定したタイトル、サブタイトルの書籍を取得します
-   * subtitleは任意です
+   * 書籍を検索します
+   * 部分一致での検索をします
    */
-  public getSeries(title: string,subtitle: string | null = null): Series{
-    let list: Series[] = this.seriesList.filter(series=>series.title === title);
+  public searchSeries(name: string): Series[]{
+    return this.seriesList.filter(series=>series.name.indexOf(name) >= 0);
+  }
 
-    if(subtitle){
-      list = this.seriesList.filter(series=>series.subtitle === subtitle);
-    }
-
-    return list[0];
+  /**
+   * 指定したIDの書籍を取得します
+   */
+  public getSeries(id: string): Series | null{
+    return this.seriesList.find(series=>series.id === id)||null;
   }
 
   /**
@@ -50,7 +51,7 @@ class Archive{
   
     let dirs: string[] = [];
 
-    for(const dir of fs.readdirSync(dirPath)){
+    for(const dir of fs.readdirSync(dirPath,{ encoding: "utf8" })){
       const fullPath: string = path.join(dirPath,dir);
       const stats: Stats = fs.statSync(fullPath);
   
