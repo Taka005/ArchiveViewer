@@ -1,6 +1,6 @@
 import { IZipEntry } from "adm-zip";
 
-class FileData{
+class Page{
   /**
    * ファイルエントリーデータ
    */
@@ -43,4 +43,4 @@ class FileData{
   }
 }
 
-export default FileData;
+export default Page;

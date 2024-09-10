@@ -66,10 +66,17 @@ class Series{
     return this.books[0].thumbnail;
   }
 
+  /**
+   * 指定した巻数を取得します
+   */
   public getBook(valume: number): Book{
     if(valume <= 0||valume > this.bookCount) throw new Error("存在しない書籍です");
 
     return this.books[valume - 1];
+  }
+
+  public getBooks(): Book[]{
+    return this.books;
   }
 }
 
