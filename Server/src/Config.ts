@@ -1,6 +1,9 @@
-import Utils from "./Utils";
-
 class Config{
+
+  /**
+   * サーバーのポート
+   */
+  public static readonly port: number = 5000;
 
   /**
    * APIKeyの使用
@@ -32,24 +35,6 @@ class Config{
    * 大きすぎる値にしないでください
    */
   public static readonly getPageLimit = 3;
-
-  /**
-   * APIKeyを取得します
-   * isUseApiKeyの値が偽でも設定されているtokenから生成されます
-   */
-  public static getApiKey(): string{
-    return Utils.toHash(this.token);
-  }
-
-  /**
-   * APIKeyを確認します
-   * isUseApiKeyが偽の場合は常に真が返されます
-   */
-  public static checkApiKey(value: string): boolean{
-    if(!this.isUseApiKey) return true;
-
-    return value === this.getApiKey();
-  }
 }
 
 export default Config;
