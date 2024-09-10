@@ -10,6 +10,9 @@ class Server{
     this.app = express();
   }
 
+  /**
+   * サーバーを起動します
+   */
   public run(): void{
     this.app.listen(Config.port,()=>{
       Log.info(`${Config.port}番ポートで起動しました`);

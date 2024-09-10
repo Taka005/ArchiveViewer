@@ -1,5 +1,6 @@
 import path from "path";
-import Zip, { IZipEntry } from "adm-zip";
+import Zip from "adm-zip";
+import FileData from "./FileData";
 
 /**
  * 書籍の管理
@@ -8,7 +9,7 @@ class Book{
   /**
    * 格納されているファイルのエントリー配列
    */
-  private files: IZipEntry[];
+  private files: FileData[];
 
   /**
    * 書籍ファイルのパス
@@ -32,10 +33,10 @@ class Book{
 
     const zip: Zip = new Zip(filePath);
 
-    this.files = zip
-      .getEntries()
-      .filter(entry=>entry.entryName.match(Book.fileExp))
-      .sort((a,b)=>a.entryName.localeCompare(b.entryName));
+    this.files = zip.getEntries()
+      .filter(entry=>entry.entryName.match(Book.fileExp)&&!entry.isDirectory)
+      .sort((a,b)=>a.entryName.localeCompare(b.entryName))
+      .map(entry=>new FileData(entry));
   }
 
   /**
@@ -58,9 +59,9 @@ class Book{
   public getPageData(page: number): Buffer{
     if(page <= 0||page > this.pageCount) throw new Error("存在しないページです");
 
-    const entry = this.files[page - 1];
+    const file = this.files[page - 1];
 
-    return entry.getData();
+    return file.toBuffer();
   }
 }
 

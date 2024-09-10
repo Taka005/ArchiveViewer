@@ -27,6 +27,11 @@ class Series{
    */
   private books: Book[];
 
+  /**
+   * 抽出するファイル拡張子の正規表現
+   */
+  public static readonly fileExp: RegExp = /\.(zip|cbz)$/i;
+
   constructor(dirPath: string){
     this.path = dirPath;
 
@@ -42,7 +47,9 @@ class Series{
     const files: string[] = fs.readdirSync(this.path,{ encoding: "utf8" });
     if(!files[0]) throw new Error("書籍が存在しません");
 
-    this.books = files.map(file=>new Book(path.join(dirPath,file)));
+    this.books = files
+      .filter(file=>file.match(Series.fileExp))
+      .map(file=>new Book(path.join(dirPath,file)));
   }
 
   /**
