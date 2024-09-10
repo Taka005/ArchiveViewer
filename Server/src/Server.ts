@@ -25,6 +25,10 @@ class Server{
     });
   }
 
+  route(): void{
+
+  }
+
   /**
    * APIKeyを取得します
    * Config.isUseApiKeyの値が偽でも設定されているtokenから生成されます
