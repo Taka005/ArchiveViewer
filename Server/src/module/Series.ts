@@ -67,7 +67,7 @@ class Series{
   }
 
   /**
-   * 指定した巻数を取得します
+   * 指定した書籍番号を取得します
    */
   public getBook(valume: number): Book{
     if(valume <= 0||valume > this.bookCount) throw new Error("存在しない書籍です");
@@ -75,6 +75,9 @@ class Series{
     return this.books[valume - 1];
   }
 
+  /**
+   * 全ての書籍を取得します
+   */
   public getBooks(): Book[]{
     return this.books;
   }

@@ -5,7 +5,7 @@ import Config from "../Config";
 
 class Archive{
   /**
-   * 書籍一覧
+   * シリーズ一覧
    */
   public seriesList: Series[];
 
@@ -15,7 +15,15 @@ class Archive{
   }
 
   /**
+   * シリーズ数を取得します
+   */
+  public get seriesCount(): number{
+    return this.seriesList.length;
+  }
+
+  /**
    * 指定したタイトル、サブタイトルの書籍を取得します
+   * subtitleは任意です
    */
   public getSeries(title: string,subtitle: string | null = null): Series{
     let list: Series[] = this.seriesList.filter(series=>series.title === title);
@@ -27,6 +35,16 @@ class Archive{
     return list[0];
   }
 
+  /**
+   * 全てのシリーズを取得します
+   */
+  public getAllSeries(): Series[]{
+    return this.seriesList;
+  }
+
+  /**
+   * 指定されたディレクトリのフォルダを探索します
+   */
   private findDir(dirPath: string, depth: number = 0): string[]{
     if(depth > 2) return [];
   
