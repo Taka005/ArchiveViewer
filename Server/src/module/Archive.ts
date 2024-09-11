@@ -22,7 +22,7 @@ class Archive{
   }
 
   /**
-   * 書籍を検索します
+   * シリーズを検索します
    * 部分一致での検索をします
    */
   public searchSeries(name: string): Series[]{
@@ -48,19 +48,19 @@ class Archive{
    */
   private findDir(dirPath: string, depth: number = 0): string[]{
     if(depth > 2) return [];
-  
+
     let dirs: string[] = [];
 
     for(const dir of fs.readdirSync(dirPath,{ encoding: "utf8" })){
       const fullPath: string = path.join(dirPath,dir);
       const stats: Stats = fs.statSync(fullPath);
-  
+
       if(stats.isDirectory()){
         dirs.push(fullPath);
         dirs = dirs.concat(this.findDir(fullPath,depth + 1));
       }
     }
-  
+
     return dirs;
   }
 }

@@ -1,6 +1,7 @@
 import path from "path";
 import Zip from "adm-zip";
 import Page from "./Page";
+import Utils from "src/Utils";
 
 /**
  * 書籍の管理
@@ -17,6 +18,12 @@ class Book{
   public readonly path: string;
 
   /**
+   * 書籍ID
+   * これは書籍ファイルのパスをハッシュ化した値です
+   */
+  public readonly id: string;
+
+  /**
    * ファイルの名前
    * 拡張子は含みません
    */
@@ -29,6 +36,7 @@ class Book{
 
   constructor(filePath: string){
     this.path = filePath;
+    this.id = Utils.toHash(path);
     this.name = path.basename(filePath,path.extname(filePath));
 
     const zip: Zip = new Zip(filePath);

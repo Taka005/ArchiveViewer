@@ -69,6 +69,7 @@ class Series{
 
     this.books = files
       .filter(file=>file.match(Series.fileExp))
+      .sort((a,b)=>a.localeCompare(b))
       .map(file=>new Book(path.join(dirPath,file)));
   }
 
@@ -84,6 +85,14 @@ class Series{
    */
   public get thumbnail(): Buffer{
     return this.books[0].thumbnail;
+  }
+
+  /**
+   * 書籍を検索します
+   * 部分一致での検索をします
+   */
+  public searchSeries(name: string): Book[]{
+    return this.books.filter(book=>book.name.indexOf(name) >= 0);
   }
 
   /**

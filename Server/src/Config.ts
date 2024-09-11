@@ -28,12 +28,6 @@ class Config{
    * デバッグモード
    */
   public static readonly debugMode: boolean = false;
-
-  /**
-   * 一回のリクエストで配信される画像枚数
-   * 大きすぎる値にしないでください
-   */
-  public static readonly getPageLimit = 3;
 }
 
 export default Config;
