@@ -3,6 +3,7 @@ import fs from "fs";
 import Book from "./Book";
 import Config from "../Config";
 import Utils from "../Utils";
+import Log from "../Log";
 
 /**
  * シリーズの管理
@@ -25,7 +26,7 @@ class Series{
    * 書籍名をSHA256でハッシュ化した値です
    */
   public readonly id: string;
-  
+
   /**
    * 書籍タイトル
    */
@@ -54,12 +55,14 @@ class Series{
       .filter(dir=>dir !== "");
 
     if(!target[0]) throw new Error("タイトルが取得できません");
-    
+
     this.title = target[0];
     this.subtitle = target[1]||null;
 
     this.name = Utils.toSeriesName(this.title,this.subtitle);
     this.id = Utils.toSeriesId(this.title,this.subtitle);
+
+    Log.debug(`${this.name}(${this.id})をロードしました`);
 
     const files: string[] = fs.readdirSync(this.path,{ encoding: "utf8" });
     if(!files[0]) throw new Error("書籍が存在しません");

@@ -2,6 +2,9 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import Log from "./Log"
 import Config from "./Config";
 import Utils from "./Utils";
+import ArchiveController from "./controller/ArchiveController";
+import SeriesController from "./controller/SeriesController";
+import BookController from "./controller/BookController";
 
 class Server{
   public app: Express;
@@ -43,7 +46,22 @@ class Server{
       }
     });
 
+    this.app.use("/archive",new ArchiveController().router);
+    this.app.use("/series",new SeriesController().router);
+    this.app.use("/book",new BookController().router);
 
+    this.app.use((req: Request,res: Response)=>{
+      res.status(404).json({
+        message: "404 NOT FOUND"
+      });
+    });
+
+    this.app.use((err: Error,req: Request,res: Response)=>{
+      res.status(500).json({
+        "message": "500 Internal Server Error",
+        "stack": err.stack
+      });
+    });
   }
 
   /**
