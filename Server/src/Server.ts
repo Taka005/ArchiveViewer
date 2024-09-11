@@ -1,4 +1,5 @@
 import express, { Express, Request, Response, NextFunction } from "express";
+import cors from "cors";
 import Log from "./Log"
 import Config from "./Config";
 import Utils from "./Utils";
@@ -44,6 +45,10 @@ class Server{
    * APIの制御
    */
   private route(): void{
+    this.app.use(express.json())
+    this.app.use(express.urlencoded({ extended: true }))
+    this.app.use(cors());
+
     this.app.use((req: Request,res: Response,next: NextFunction)=>{
       Log.info(`${req.ip} - [${req.method}] ${req.originalUrl}`);
 

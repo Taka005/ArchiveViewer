@@ -20,7 +20,7 @@ class ArchiveController extends BaseController{
         message: "クエリパラメーターが不足しています"
       });
 
-      const seriesList = archive.searchSeries(word);
+      const seriesList = archive.searchSeries(word as string);
 
       res.status(200).json(this.parseSeries(seriesList));
     });
@@ -30,7 +30,7 @@ class ArchiveController extends BaseController{
     id: string
     name: string
     title: string
-    subtitle: string
+    subtitle: string | null
     bookCount: number
   }[]{
     return seriesList.map(series=>({

@@ -8,7 +8,7 @@ class SeriesController extends BaseController{
     super(archive);
 
     this.router.get("/:seriesId/list",(req: Request,res: Response)=>{
-      const { seriesId } = req.param;
+      const { seriesId } = req.params;
 
       const series = archive.getSeries(seriesId);
       if(!series) return res.status(400).json({
@@ -21,7 +21,7 @@ class SeriesController extends BaseController{
     });
 
     this.router.get("/:seriesId/search",(req: Request,res: Response)=>{
-      const { seriesId } = req.param;
+      const { seriesId } = req.params;
       const { word } = req.query;
 
       if(!word) return res.status(400).json({
@@ -33,19 +33,20 @@ class SeriesController extends BaseController{
         message: "存在しないシリーズです"
       });
 
-      const books = series.searchBooks(word);
+      const books = series.searchBooks(word as string);
 
       res.status(200).json(this.parseBooks(books));
     });
 
     this.router.get("/:seriesId/thumbnail",(req: Request,res: Response)=>{
-      const { seriesId } = req.param;
+      const { seriesId } = req.params;
 
       const series = archive.getSeries(seriesId);
       if(!series) return res.status(400).json({
         message: "存在しないシリーズです"
       });
 
+      res.set("Content-Type","image/png");
       res.status(200).send(series.thumbnail);
     });
   }

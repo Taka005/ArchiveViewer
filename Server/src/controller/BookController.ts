@@ -17,7 +17,19 @@ class BookController extends BaseController{
 
       const pages = book.getPages();
 
-      res.json(this.parsePage(pages));
+      res.status(200).json(this.parsePage(pages));
+    });
+
+    this.router.get("/:bookId/thumbnail",(req: Request,res: Response)=>{
+      const { bookId } = req.params;
+
+      const book = archive.getBook(bookId);
+      if(!book) return res.status(400).json({
+        message: "存在しない書籍です"
+      });
+
+      res.set("Content-Type","image/png");
+      res.status(200).send(book.thumbnail);
     });
   }
 
