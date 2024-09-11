@@ -36,7 +36,7 @@ class Book{
 
   constructor(filePath: string){
     this.path = filePath;
-    this.id = Utils.toHash(filePath);
+    this.id = Utils.toMd5(filePath);
     this.name = path.basename(filePath,path.extname(filePath));
 
     const zip: Zip = new Zip(filePath);

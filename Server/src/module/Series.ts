@@ -23,7 +23,7 @@ class Series{
 
   /**
    * 書籍ID
-   * 書籍名をSHA256でハッシュ化した値です
+   * 書籍名をMD5でハッシュ化した値です
    */
   public readonly id: string;
 
