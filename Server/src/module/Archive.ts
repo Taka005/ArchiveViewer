@@ -1,6 +1,7 @@
 import fs, { Stats } from "fs";
 import path from "path";
 import Series from "./Series";
+import Book from "./Book";
 import Config from "../Config";
 
 class Archive{

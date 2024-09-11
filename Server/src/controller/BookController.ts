@@ -31,6 +31,30 @@ class BookController extends BaseController{
       res.set("Content-Type","image/png");
       res.status(200).send(book.thumbnail);
     });
+
+    this.router.get("/:bookId/page/:pageNum",(req: Request,res: Response)=>{
+      const { bookId, pageNum } = req.params;
+
+      const book = archive.getBook(bookId);
+      if(!book) return res.status(400).json({
+        message: "存在しない書籍です"
+      });
+
+      if(isNaN(Number(pageNum))) return res.status(400).json({
+        message: "ページ数は数字で指定してください"
+      });
+
+      try{
+        const page = book.getPage(Number(pageNum));
+
+        res.set("Content-Type","image/png");
+        res.status(200).send(page.toBuffer());
+      }catch(error){
+        res.status(400).json({
+          message: "存在しないページ数です"
+        });  
+      }
+    });
   }
 
   parsePage(pages: Page[]): {
