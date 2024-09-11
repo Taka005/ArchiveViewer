@@ -52,14 +52,14 @@ class Server{
 
     this.app.use((req: Request,res: Response)=>{
       res.status(404).json({
-        message: "404 NOT FOUND"
+        message: "リソースが存在しません"
       });
     });
 
     this.app.use((err: Error,req: Request,res: Response)=>{
       res.status(500).json({
-        "message": "500 Internal Server Error",
-        "stack": err.stack
+        message: "内部エラー",
+        stack: err.stack
       });
     });
   }
