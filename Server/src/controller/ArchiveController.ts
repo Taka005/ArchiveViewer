@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import BaseController from "./BaseController";
 import Archive from "../module/Archive";
+import Series from "src/module/Series";
 
 class ArchiveController extends BaseController{
   constructor(archive: Archive){
@@ -8,35 +9,37 @@ class ArchiveController extends BaseController{
 
     this.router.get("/list",(req: Request,res: Response)=>{
       const seriesList = archive.getAllSeries()
-        .map(series=>({
-          id: series.id,
-          name: series.name,
-          title: series.title,
-          subtitle: series.subtitle,
-          bookCount: series.bookCount
-        }));
 
-      res.status(200).json(seriesList);
+      res.status(200).json(this.parseSeries(seriesList));
     });
 
     this.router.get("/search",(req: Request,res: Response)=>{
-      const query = req.params.word;
+      const { word } = req.query;
 
-      if(!query) return res.status(400).json({
+      if(!word) return res.status(400).json({
         message: "クエリパラメーターが不足しています"
       });
 
-      const seriesList = archive.searchSeries(query)
-        .map(series=>({
-          id: series.id,
-          name: series.name,
-          title: series.title,
-          subtitle: series.subtitle,
-          bookCount: series.bookCount
-        }));
+      const seriesList = archive.searchSeries(word);
 
-      res.status(200).json(seriesList);
+      res.status(200).json(this.parseSeries(seriesList));
     });
+  }
+
+  private parseSeries(seriesList: Series[]): {
+    id: string
+    name: string
+    title: string
+    subtitle: string
+    bookCount: number
+  }[]{
+    return seriesList.map(series=>({
+      id: series.id,
+      name: series.name,
+      title: series.title,
+      subtitle: series.subtitle,
+      bookCount: series.bookCount
+    }));
   }
 }
 

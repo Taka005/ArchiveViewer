@@ -70,6 +70,13 @@ class Book{
   }
 
   /**
+   * 全てのページを取得します
+   */
+  public getPages(): Page[]{
+    return this.pages;
+  }
+
+  /**
    * 指定したページを取得します
    */
   public getPage(page: number): Page{

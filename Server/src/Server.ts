@@ -2,15 +2,25 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import Log from "./Log"
 import Config from "./Config";
 import Utils from "./Utils";
+import Archive from "./module/Archive";
 import ArchiveController from "./controller/ArchiveController";
 import SeriesController from "./controller/SeriesController";
 import BookController from "./controller/BookController";
 
 class Server{
+  /**
+   * ExpressApp
+   */
   public app: Express;
+
+  /**
+   * アーカイブ
+   */
+  public archive: Archive;
 
   constructor(){
     this.app = express();
+    this.archive = new Archive();
 
     this.route();
   }
@@ -46,9 +56,9 @@ class Server{
       }
     });
 
-    this.app.use("/archive",new ArchiveController().router);
-    this.app.use("/series",new SeriesController().router);
-    this.app.use("/book",new BookController().router);
+    this.app.use("/archive",new ArchiveController(this.archive).router);
+    this.app.use("/series",new SeriesController(this.archive).router);
+    this.app.use("/book",new BookController(this.archive).router);
 
     this.app.use((req: Request,res: Response)=>{
       res.status(404).json({

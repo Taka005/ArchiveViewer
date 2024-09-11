@@ -91,7 +91,7 @@ class Series{
    * 書籍を検索します
    * 部分一致での検索をします
    */
-  public searchSeries(name: string): Book[]{
+  public searchBooks(name: string): Book[]{
     return this.books.filter(book=>book.name.indexOf(name) >= 0);
   }
 

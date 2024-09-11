@@ -44,6 +44,20 @@ class Archive{
   }
 
   /**
+   * 全ての書籍を取得します
+   */
+  public getBooks(): Book[]{
+    return this.seriesList.map(series=>series.getBooks()).flat();
+  }
+
+  /**
+   * IDから書籍を取得します
+   */
+  public getBook(id: string): Book | null{
+    return this.getBooks().find(book=>book.id === id)||null;
+  }
+
+  /**
    * 指定されたディレクトリのフォルダを探索します
    */
   private findDir(dirPath: string, depth: number = 0): string[]{
