@@ -1,8 +1,9 @@
 import path from "path";
 import Zip from "./Zip";
 import Page from "./Page";
-import Utils from "src/Utils";
-import Log from "src/Log";
+import Utils from "../Utils";
+import Log from "../Log";
+import Cache from "../Cache";
 
 /**
  * 書籍の管理
@@ -73,7 +74,11 @@ class Book{
   public getPageData(pageNum: number): Promise<Buffer>{
     const page = this.getPage(pageNum);
 
-    return this.file.getData(page.path);
+    if(Cache.exist(this,page)){
+      return Cache.get(this,page);
+    }else{
+      return this.file.getData(page.path);
+    }
   }
 
   /**

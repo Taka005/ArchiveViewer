@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import BaseController from "./BaseController";
 import Archive from "../module/Archive";
-import Series from "src/module/Series";
+import Series from "../module/Series";
 
 class ArchiveController extends BaseController{
   constructor(archive: Archive){
