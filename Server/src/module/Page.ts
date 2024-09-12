@@ -1,11 +1,20 @@
 import path from "path";
 import { Entry } from "yauzl";
+import Utils from "../Utils";
 
 class Page{
+
   /**
    * フォルダ内でのパス
    */
   public readonly path: string;
+
+  /**
+   * ページID
+   * パスをMD5でハッシュ化した値です
+   * 他のシリーズとIDが同じになる可能性があります
+   */
+  public readonly id: string;
 
   /**
    * ファイル名
@@ -25,6 +34,7 @@ class Page{
 
   constructor(data: Entry){
     this.path = data.fileName;
+    this.id = Utils.toMd5(this.path);
     this.name = path.basename(data.fileName);
     this.size = data.uncompressedSize;
     this.updateAt = data.getLastModDate();

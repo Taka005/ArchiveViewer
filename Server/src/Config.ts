@@ -22,7 +22,19 @@ class Config{
    * この値のパスが公開されます
    * フルパスを指定してください
    */
-  public static readonly archivePath: string = "/workspaces/ArchiveViewer/strage";
+  public static readonly archivePath: string = "";
+
+  /**
+   * キャッシュの使用
+   * 無効にするとパフォーマンスが低下する可能性があります
+   */
+  public static readonly isUseCache: boolean = true;
+
+  /**
+   * キャッシュパス
+   * 画像のキャッシュが保存されます
+   */
+  public static readonly cachePath: string = "./cache";
 
   /**
    * デバッグモード
