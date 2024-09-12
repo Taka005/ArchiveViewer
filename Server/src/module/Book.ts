@@ -77,7 +77,11 @@ class Book{
     if(Cache.exist(this,page)){
       return Cache.get(this,page);
     }else{
-      return this.file.getData(page.path);
+      const data = this.file.getData(page.path);
+
+      Cache.save(this,page,data);
+
+      return data;
     }
   }
 
