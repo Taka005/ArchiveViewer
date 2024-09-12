@@ -5,10 +5,10 @@ const server = new Server();
 
 server.run();
 
-process.on("uncaughtException",async(error)=>{
-  Log.error(error.stack);
+process.on("uncaughtException",async(error: Error)=>{
+  Log.error(error.stack||"不明なエラー");
 });
 
-process.on("unhandledRejection",async(error)=>{
-  Log.error(error.stack);
+process.on("unhandledRejection",async(error: Error)=>{
+  Log.error(error.stack||"不明なエラー");
 });

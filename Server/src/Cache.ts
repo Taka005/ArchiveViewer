@@ -1,5 +1,5 @@
 import fs from "fs";
-import Config from "../Config";
+import Config from "./Config";
 import Book from "./module/Book";
 import Page from "./module/Page";
 import Log from "./Log";
@@ -37,10 +37,12 @@ class Cache{
   /**
    * キャッシュを取得します
    */
-  public static get(book: Book,page: Page): Buffer{
-    if(!this.exist(book,page)) throw new Error("キャッシュが存在しません");
+  public static get(book: Book,page: Page): Promise<Buffer>{
+    return new Promise<Buffer>((resolve,reject)=>{
+      if(!this.exist(book,page)) return reject("キャッシュが存在しません");
 
-    return fs.readFileSync(this.getPath(book,page),"binary")
+      resolve(fs.readFileSync(this.getPath(book,page)));
+    });
   }
 
   /**
@@ -49,7 +51,7 @@ class Cache{
   public static reset(): void{
     Log.debug("全てのキャッシュを削除しました");
 
-    fs.rmdir(Config.cachePath,{ recursive: true });
+    fs.rmdirSync(Config.cachePath,{ recursive: true });
   }
 }
 
