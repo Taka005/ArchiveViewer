@@ -23,6 +23,11 @@ class Page{
   public readonly name: string;
 
   /**
+   * ファイルの拡張子
+   */
+  public readonly extension: string;
+
+  /**
    * ファイルサイズ(Byte)
    */
   public readonly size: number;
@@ -36,6 +41,7 @@ class Page{
     this.path = data.fileName;
     this.id = Utils.toMd5(this.path);
     this.name = path.basename(data.fileName);
+    this.extension = path.extname(data.fileName);
     this.size = data.uncompressedSize;
     this.updateAt = data.getLastModDate();
   }
