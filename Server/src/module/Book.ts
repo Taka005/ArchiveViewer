@@ -47,8 +47,8 @@ class Book{
     this.file.getEntries()
       .then(entries=>{
         this.pages = entries
-          .filter(entry=>entry.entryName.match(Book.fileExp))
-          .sort((a,b)=>a.entryName.localeCompare(b.entryName))
+          .filter(entry=>entry.fileName.match(Book.fileExp))
+          .sort((a,b)=>a.fileName.localeCompare(b.fileName))
           .map(entry=>new Page(entry));
 
         Log.debug(`${this.name}(${this.id})の書籍をロードしました`);

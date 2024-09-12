@@ -1,11 +1,7 @@
-import { EntryData } from "../@types";
+import path from "path";
+import { Entry } from "yauzl";
 
 class Page{
-  /**
-   * ファイルエントリーデータ
-   */
-  private data: EntryData;
-
   /**
    * フォルダ内でのパス
    */
@@ -27,12 +23,11 @@ class Page{
    */
   public readonly updateAt: Date;
 
-  constructor(data: EntryData){
-    this.data = data;
-    this.path = data.entryName;
-    this.name = data.name;
-    this.size = data.size;
-    this.updateAt = new Date(data.time);
+  constructor(data: Entry){
+    this.path = data.fileName;
+    this.name = path.basename(data.fileName);
+    this.size = data.uncompressedSize;
+    this.updateAt = data.getLastModDate();
   }
 }
 

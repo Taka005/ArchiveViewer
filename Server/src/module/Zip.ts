@@ -1,6 +1,4 @@
-import path from "path";
 import yauzl, { Entry } from "yauzl";
-import { EntryData } from "../@types";
 
 class Zip{
   /**
@@ -15,23 +13,18 @@ class Zip{
   /**
    * 全てのエントリーを取得
    */
-  getEntries(): Promise<EntryData[]>{
+  getEntries(): Promise<Entry[]>{
     return new Promise((resolve,reject)=>{
       yauzl.open(this.path,{ lazyEntries: true },(err,zipfile)=>{
         if(err) return reject(err);
 
-        const entries: EntryData[] = [];
+        const entries: Entry[] = [];
 
         zipfile.readEntry();
 
         zipfile.on("entry",(entry: Entry)=>{
           if(!entry.fileName.endsWith("/")){
-            entries.push({
-              entryName: entry.fileName,
-              name: path.basename(entry.fileName),
-              size: entry.uncompressedSize,
-              time: entry.lastModFileTime
-            });
+            entries.push(entry);
           }
 
           zipfile.readEntry();
