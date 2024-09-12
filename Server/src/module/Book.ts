@@ -71,13 +71,16 @@ class Book{
     return this.pages.reduce((total,page)=>total+page.size,0);
   }
 
-  public getPageData(pageNum: number): Promise<Buffer>{
+  /**
+   * 指定したページのデータを取得します
+   */
+  public async getPageData(pageNum: number): Promise<Buffer>{
     const page = this.getPage(pageNum);
 
     if(Cache.exist(this,page)){
-      return Cache.get(this,page);
+      return await Cache.get(this,page);
     }else{
-      const data = this.file.getData(page.path);
+      const data = await this.file.getData(page.path);
 
       Cache.save(this,page,data);
 
@@ -88,8 +91,8 @@ class Book{
   /**
    * サムネイル
    */
-  public getThumbnail(): Promise<Buffer>{
-    return this.getPageData(1);
+  public async getThumbnail(): Promise<Buffer>{
+    return await this.getPageData(1);
   }
 
   /**

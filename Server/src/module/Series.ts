@@ -83,8 +83,8 @@ class Series{
   /**
    * シリーズのサムネイル
    */
-  public getThumbnail(): Promise<Buffer>{
-    return this.books[0].getThumbnail();
+  public async getThumbnail(): Promise<Buffer>{
+    return await this.books[0].getThumbnail();
   }
 
   /**
