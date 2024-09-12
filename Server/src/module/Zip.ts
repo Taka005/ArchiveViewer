@@ -1,15 +1,6 @@
 import path from "path";
-import yauzl from "yauzl";
-
-/**
- * ファイルのエントリーデータ
- */
-type Entry = {
-  entryName: string
-  name: string
-  size: number
-  time: string
-}
+import yauzl, { Entry } from "yauzl";
+import { EntryData } from "../@types";
 
 class Zip{
   /**
@@ -24,15 +15,16 @@ class Zip{
   /**
    * 全てのエントリーを取得
    */
-  getEntries(): Promise<Entry[]>{
+  getEntries(): Promise<EntryData[]>{
     return new Promise((resolve,reject)=>{
-      yauzl.open(this.zipPath,{ lazyEntrites: true },(err,zipfile)=>{
+      yauzl.open(this.path,{ lazyEntries: true },(err,zipfile)=>{
         if(err) return reject(err);
 
-        const entries: Entry[] = [];
+        const entries: EntryData[] = [];
+
         zipfile.readEntry();
 
-        zipfile.on("entry",(entry)=>{
+        zipfile.on("entry",(entry: Entry)=>{
           if(!entry.fileName.endsWith("/")){
             entries.push({
               entryName: entry.fileName,
@@ -61,17 +53,17 @@ class Zip{
    */
   getData(fileName: string): Promise<Buffer>{
     return new Promise<Buffer>((resolve,reject)=>{
-      yauzl.open(this.zipPath,{ lazyEntries: true },(err,zipfile)=>{
+      yauzl.open(this.path,{ lazyEntries: true },(err,zipfile)=>{
         if(err) return reject(err);
 
         zipfile.readEntry();
 
-        zipfile.on("entry",(entry)=>{
+        zipfile.on("entry",(entry: Entry)=>{
           if(entry.fileName === fileName){
             zipfile.openReadStream(entry,(err,readStream)=>{
               if(err) return reject(err);
 
-              const chunks: string = [];
+              const chunks: Uint8Array[] = [];
 
               readStream.on("data",(chunk)=>chunks.push(chunk));
 

@@ -1,10 +1,10 @@
-import { IZipEntry } from "adm-zip";
+import { EntryData } from "../@types";
 
 class Page{
   /**
    * ファイルエントリーデータ
    */
-  private data: IZipEntry;
+  private data: EntryData;
 
   /**
    * フォルダ内でのパス
@@ -27,19 +27,12 @@ class Page{
    */
   public readonly updateAt: Date;
 
-  constructor(data: IZipEntry){
+  constructor(data: EntryData){
     this.data = data;
     this.path = data.entryName;
     this.name = data.name;
-    this.size = data.header.size;
-    this.updateAt = new Date(data.header.time);
-  }
-
-  /**
-   * ファイルをバッファーに変換します
-   */
-  public toBuffer(): Buffer{
-    return this.data.getData();
+    this.size = data.size;
+    this.updateAt = new Date(data.time);
   }
 }
 

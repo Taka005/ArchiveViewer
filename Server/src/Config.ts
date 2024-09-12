@@ -8,7 +8,7 @@ class Config{
    * APIKeyの使用
    * リクエストにAPIKeyを使用する場合は真に設定してください
    */
-  public static readonly isUseApiKey: boolean = true;
+  public static readonly isUseApiKey: boolean = false;
 
   /**
    * APIアクセス鍵
@@ -22,7 +22,7 @@ class Config{
    * この値のパスが公開されます
    * フルパスを指定してください
    */
-  public static readonly archivePath: string = "/archive";
+  public static readonly archivePath: string = "/workspaces/ArchiveViewer/strage";
 
   /**
    * デバッグモード

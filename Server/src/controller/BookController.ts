@@ -20,7 +20,7 @@ class BookController extends BaseController{
       res.status(200).json(this.parsePage(pages));
     });
 
-    this.router.get("/:bookId/thumbnail",(req: Request,res: Response)=>{
+    this.router.get("/:bookId/thumbnail",async(req: Request,res: Response)=>{
       const { bookId } = req.params;
 
       const book = archive.getBook(bookId);
@@ -29,10 +29,10 @@ class BookController extends BaseController{
       });
 
       res.set("Content-Type","image/png");
-      res.status(200).send(book.thumbnail);
+      res.status(200).send(await book.getThumbnail());
     });
 
-    this.router.get("/:bookId/page/:pageNum",(req: Request,res: Response)=>{
+    this.router.get("/:bookId/page/:pageNum",async(req: Request,res: Response)=>{
       const { bookId, pageNum } = req.params;
 
       const book = archive.getBook(bookId);
@@ -45,10 +45,8 @@ class BookController extends BaseController{
       });
 
       try{
-        const page = book.getPage(Number(pageNum));
-
         res.set("Content-Type","image/png");
-        res.status(200).send(page.toBuffer());
+        res.status(200).send(await book.getPageData(Number(pageNum)));
       }catch(error){
         res.status(400).json({
           message: "存在しないページ数です"

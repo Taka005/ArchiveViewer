@@ -1,16 +1,19 @@
 import path from "path";
-import Zip from "adm-zip";
+import Zip from "./Zip";
 import Page from "./Page";
 import Utils from "src/Utils";
+import Log from "src/Log";
 
 /**
  * 書籍の管理
  */
 class Book{
+  private file: Zip;
+
   /**
    * 格納されているページの配列
    */
-  private pages: Page[];
+  private pages: Page[] = [];
 
   /**
    * 書籍ファイルのパス
@@ -39,12 +42,17 @@ class Book{
     this.id = Utils.toMd5(filePath);
     this.name = path.basename(filePath,path.extname(filePath));
 
-    const zip: Zip = new Zip(filePath);
+    this.file = new Zip(filePath);
 
-    this.pages = zip.getEntries()
-      .filter(entry=>entry.entryName.match(Book.fileExp)&&!entry.isDirectory)
-      .sort((a,b)=>a.entryName.localeCompare(b.entryName))
-      .map(entry=>new Page(entry));
+    this.file.getEntries()
+      .then(entries=>{
+        this.pages = entries
+          .filter(entry=>entry.entryName.match(Book.fileExp))
+          .sort((a,b)=>a.entryName.localeCompare(b.entryName))
+          .map(entry=>new Page(entry));
+
+        Log.debug(`${this.name}(${this.id})の書籍をロードしました`);
+      });
   }
 
   /**
@@ -62,11 +70,17 @@ class Book{
     return this.pages.reduce((total,page)=>total+page.size,0);
   }
 
+  public getPageData(pageNum: number): Promise<Buffer>{
+    const page = this.getPage(pageNum);
+
+    return this.file.getData(page.path);
+  }
+
   /**
    * サムネイル
    */
-  public get thumbnail(): Buffer{
-    return this.getPage(1).toBuffer();
+  public getThumbnail(): Promise<Buffer>{
+    return this.getPageData(1);
   }
 
   /**

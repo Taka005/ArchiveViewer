@@ -38,7 +38,7 @@ class SeriesController extends BaseController{
       res.status(200).json(this.parseBooks(books));
     });
 
-    this.router.get("/:seriesId/thumbnail",(req: Request,res: Response)=>{
+    this.router.get("/:seriesId/thumbnail",async(req: Request,res: Response)=>{
       const { seriesId } = req.params;
 
       const series = archive.getSeries(seriesId);
@@ -47,7 +47,7 @@ class SeriesController extends BaseController{
       });
 
       res.set("Content-Type","image/png");
-      res.status(200).send(series.thumbnail);
+      res.status(200).send(await series.getThumbnail());
     });
   }
 
