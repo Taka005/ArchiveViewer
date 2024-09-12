@@ -38,8 +38,8 @@ class Cache{
    * キャッシュを取得します
    */
   public static get(book: Book,page: Page): Promise<Buffer>{
-    return new Promise<Buffer>((resolve,reject)=>{
-      if(!this.exist(book,page)) return reject("キャッシュが存在しません");
+    return new Promise<Buffer>((resolve)=>{
+      if(!this.exist(book,page)) throw new Error("キャッシュが存在しません");
 
       resolve(fs.readFileSync(this.getPath(book,page)));
     });

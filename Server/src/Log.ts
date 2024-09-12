@@ -7,7 +7,7 @@ class Log{
   private static getDate(): string{
     const now: Date = new Date();
 
-    return `\x1b[32m[${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}]`;
+    return `[${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}]`;
   }
 
   /**
@@ -33,7 +33,7 @@ class Log{
 
   /**
    * デバッグログを表示
-   * デバッグモードが有効でない場合は表示されません 
+   * デバッグモードが有効でない場合は表示されません
    */
   public static debug(message: string): void{
     if(!Config.debugMode) return;
