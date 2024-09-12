@@ -19,7 +19,7 @@ class Cache{
     if(!Config.isUseCache) return;
 
     fs.mkdirSync(`${Config.cachePath}/${book.id}`,{ recursive: true });
-    fs.writeFileSync(this.getPath(book,page),buffer,"binary");
+    fs.writeFileSync(this.getPath(book,page),buffer);
 
     Log.debug(`${book.name}(${book.id})/${page.id}のキャッシュを保存しました`);
   }
