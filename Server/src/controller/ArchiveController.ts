@@ -26,6 +26,9 @@ class ArchiveController extends BaseController{
     });
   }
 
+  /**
+   * データを変換します
+   */
   private parseSeries(seriesList: Series[]): {
     id: string
     name: string

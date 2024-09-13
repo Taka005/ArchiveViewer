@@ -51,6 +51,9 @@ class SeriesController extends BaseController{
     });
   }
 
+  /**
+   * データを変換します
+   */
   private parseBooks(books: Book[]): {
     id: string
     name: string

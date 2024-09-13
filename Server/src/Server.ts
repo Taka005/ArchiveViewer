@@ -7,6 +7,7 @@ import Archive from "./module/Archive";
 import ArchiveController from "./controller/ArchiveController";
 import SeriesController from "./controller/SeriesController";
 import BookController from "./controller/BookController";
+import Cache from "./Cache";
 
 class Server{
   /**
@@ -63,6 +64,12 @@ class Server{
 
     this.app.get("/",(req: Request,res: Response)=>{
       res.status(200).send("Archive Viewer");
+    });
+
+    this.app.get("/cache",(req: Request,res: Response)=>{
+      Cache.reset();
+
+      res.status(200).send("キャッシュを削除しました");
     });
 
     this.app.use("/archive",new ArchiveController(this.archive).router);

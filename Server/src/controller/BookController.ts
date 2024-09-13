@@ -50,11 +50,14 @@ class BookController extends BaseController{
       }catch(error){
         res.status(400).json({
           message: "存在しないページ数です"
-        });  
+        });
       }
     });
   }
 
+  /**
+   * データを変換します
+   */
   parsePage(pages: Page[]): {
     name: string
     size: number
