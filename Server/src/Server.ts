@@ -66,10 +66,16 @@ class Server{
       res.status(200).send("Archive Viewer");
     });
 
-    this.app.get("/cache",(req: Request,res: Response)=>{
+    this.app.delete("/cache",(req: Request,res: Response)=>{
+      if(!Config.isUseApiKey) return res.status(400).json({
+        message: "APIキーの使用を有効にしていないため利用できません"
+      });
+
       Cache.reset();
 
-      res.status(200).send("キャッシュを削除しました");
+      res.status(200).json({
+        message: "キャッシュを削除しました"
+      });
     });
 
     this.app.use("/archive",new ArchiveController(this.archive).router);

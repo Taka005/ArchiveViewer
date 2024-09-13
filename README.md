@@ -1,5 +1,5 @@
 # ArchiveViewer
-アーカイブされた書籍を閲覧することができます
+- アーカイブされた書籍を閲覧することができます
 
 ## 構成
 - 以下の構造をアーカイブとして設定できます
@@ -19,26 +19,30 @@ archive/
 ## API仕様
 - {}は任意変数です
 
-### /archive/list
+### [GET] /archive/list
 - アーカイブの一覧を取得
 
-### /archive/search?word={TEXT}
+### [GET] /archive/search?word={TEXT}
 - 指定したワードでアーカイブを検索
 
-### /series/{SERIES_ID}/list
+### [GET] /series/{SERIES_ID}/list
 - 指定したシリーズIDの書籍一覧を取得
 
-### /series/{SERIES_ID}/thumbnail
+### [GET] /series/{SERIES_ID}/thumbnail
 - 指定したシリーズIDのサムネイルを取得
 
-### /series/{SERIES_ID}/search?word={TEXT}
+### [GET] /series/{SERIES_ID}/search?word={TEXT}
 - 指定したシリーズIDの書籍を指定したワードで検索
 
-### /book/{BOOK_ID}/info
+### [GET] /book/{BOOK_ID}/info
 - 指定した書籍IDの情報を取得
 
-### /book/{BOOK_ID}/thumbnail
+### [GET] /book/{BOOK_ID}/thumbnail
 - 指定した書籍IDのサムネイルを取得
 
-### /book/{BOOK_ID}/page/{PAGE_NUM}
+### [GET] /book/{BOOK_ID}/page/{PAGE_NUM}
 - 指定した書籍IDの指定したページ数の画像データを取得
+
+### [DELETE] /cache
+- 全てのキャッシュを削除します
+- この操作はAPIキーの使用が有効である必要があります
