@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import { Archive } from "./routes/Archive"
-import { Series } from "./routes/Series";
-import { Viewer } from "./routes/Viewer";
-import { Book } from "./routes/Book";
-import { Setting } from "./routes/Setting";
-import { NotFound } from "./routes/NotFound";
+import Archive from "./routes/Archive"
+import Series from "./routes/Series";
+import Viewer from "./routes/Viewer";
+import Book from "./routes/Book";
+import Setting from "./routes/Setting";
+import NotFound from "./routes/NotFound";
 
 const App = ()=>{
   return (
