@@ -3,7 +3,7 @@ type TitleProps = {
 }
 
 type HeaderProps = {
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
 }
 
 export { TitleProps, HeaderProps };
