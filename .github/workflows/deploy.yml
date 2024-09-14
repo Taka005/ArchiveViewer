@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: cd Client
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: "npm"
-      - run: cd Client
       - run: npm ci
       - run: npm run build
       - run: npm run build:css
