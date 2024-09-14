@@ -1,5 +1,4 @@
 name: Deploy
-working-directory: /Client
 on:
   push:
     branches: [ "main" ]
@@ -13,6 +12,9 @@ jobs:
       pages: write
       id-token: write
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: /Client
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
