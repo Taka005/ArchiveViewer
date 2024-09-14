@@ -12,15 +12,13 @@ jobs:
       pages: write
       id-token: write
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: /Client
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: "npm"
+          cache-dependency-path: ./Client/package-lock.json
       - run: npm ci
       - run: npm run build
       - run: npm run build:css
