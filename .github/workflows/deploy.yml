@@ -23,8 +23,8 @@ jobs:
           cache: "npm"
           cache-dependency-path: ./Client/package-lock.json
       - run: npm ci
-      - run: npm run build
-      - run: npm run build:css
+      - run: npm run bundle
+      - run: npm run bundle:css
       - uses: actions/configure-pages@v3
       - uses: actions/upload-pages-artifact@v2
         with:
