@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Layout</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="font-noto-sans-jp bg-gray-100">
+  <div class="max-w-screen-md mx-auto p-4 border border-black" style="height: 850px;">
+    <!-- Title -->
+    <h1 class="text-center text-4xl font-bold mb-6">タイトル</h1>
+
+    <!-- Search Bar -->
+    <div class="flex justify-center mb-6">
+      <div class="flex border border-black w-2/3">
+        <input type="text" class="flex-grow p-2 border-r border-black" placeholder="検索">
+        <button class="p-2">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Image Grid -->
+    <div class="grid grid-cols-2 gap-6">
+      <!-- Item 1 -->
+      <div class="border border-black">
+        <img src="https://placehold.co/300x200" alt="画像" class="w-full">
+        <p class="text-center border-t border-black p-2">タイトル</p>
+      </div>
+      <!-- Item 2 -->
+      <div class="border border-black">
+        <img src="https://placehold.co/300x200" alt="画像" class="w-full">
+        <p class="text-center border-t border-black p-2">タイトル</p>
+      </div>
+      <!-- Item 3 -->
+      <div class="border border-black">
+        <img src="https://placehold.co/300x200" alt="画像" class="w-full">
+        <p class="text-center border-t border-black p-2">タイトル</p>
+      </div>
+      <!-- Item 4 -->
+      <div class="border border-black">
+        <img src="https://placehold.co/300x200" alt="画像" class="w-full">
+        <p class="text-center border-t border-black p-2">タイトル</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
