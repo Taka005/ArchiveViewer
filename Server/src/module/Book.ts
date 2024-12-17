@@ -49,7 +49,14 @@ class Book{
       .then(entries=>{
         this.pages = entries
           .filter(entry=>entry.fileName.match(Book.fileExp))
-          .sort((a,b)=>a.fileName.localeCompare(b.fileName))
+          .sort((a,b)=>{
+            const lengthCompare = a.fileName.length - b.fileName.length;
+            if(lengthCompare !== 0){
+              return lengthCompare;
+            }
+    
+            return a.fileName.localeCompare(b.fileName);
+          })
           .map(entry=>new Page(entry));
 
         Log.debug(`${this.name}(${this.id})の書籍をロードしました`);
@@ -75,16 +82,16 @@ class Book{
    * 指定したページのデータを取得します
    */
   public async getPageData(pageNum: number): Promise<Buffer>{
-    const page = this.getPage(pageNum);
+    const page: Page = this.getPage(pageNum);
 
     if(Cache.exist(this,page)){
       return await Cache.get(this,page);
     }else{
-      const data = await this.file.getData(page.path);
+      const buffer: Buffer = await this.file.getData(page.path);
 
-      Cache.save(this,page,data);
+      Cache.save(this,page,buffer);
 
-      return data;
+      return buffer;
     }
   }
 
