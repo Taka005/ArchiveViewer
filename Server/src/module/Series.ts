@@ -69,7 +69,14 @@ class Series{
 
     this.books = files
       .filter(file=>file.match(Series.fileExp))
-      .sort((a,b)=>a.localeCompare(b))
+      .sort((a,b)=>{
+        const lengthCompare = a.length - b.length;
+        if(lengthCompare !== 0){
+          return lengthCompare;
+        }
+
+        return a.localeCompare(b);
+      })
       .map(file=>new Book(path.join(dirPath,file)));
   }
 
