@@ -7,7 +7,7 @@ class BookController extends BaseController{
   constructor(archive: Archive){
     super(archive);
 
-    this.router.get("/:bookId/info",(req: Request,res: Response)=>{
+    this.router.get("/:bookId",(req: Request,res: Response)=>{
       const { bookId } = req.params;
 
       const book = archive.getBook(bookId);

@@ -25,7 +25,7 @@ archive/
 ### [GET] /search?word={TEXT}
 - 指定したワードでアーカイブを検索
 
-### [GET] /series/{SERIES_ID}/list
+### [GET] /series/{SERIES_ID}
 - 指定したシリーズIDの書籍一覧を取得
 
 ### [GET] /series/{SERIES_ID}/thumbnail
@@ -34,7 +34,7 @@ archive/
 ### [GET] /series/{SERIES_ID}/search?word={TEXT}
 - 指定したシリーズIDの書籍を指定したワードで検索
 
-### [GET] /book/{BOOK_ID}/info
+### [GET] /book/{BOOK_ID}
 - 指定した書籍IDの情報を取得
 
 ### [GET] /book/{BOOK_ID}/thumbnail

@@ -66,7 +66,7 @@ class Archive{
 
     let dirs: string[] = [];
 
-    for(const dir of fs.readdirSync(dirPath,{ encoding: "utf8" })){
+    fs.readdirSync(dirPath,{ encoding: "utf8" }).forEach(dir=>{
       const fullPath: string = path.join(dirPath,dir);
       const stats: Stats = fs.statSync(fullPath);
 
@@ -74,7 +74,7 @@ class Archive{
         dirs.push(fullPath);
         dirs = dirs.concat(this.findDir(fullPath,depth + 1));
       }
-    }
+    });
 
     return dirs;
   }
