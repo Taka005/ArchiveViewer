@@ -19,10 +19,10 @@ archive/
 ## API仕様
 - {}は任意変数です
 
-### [GET] /archive/list
+### [GET] /
 - アーカイブの一覧を取得
 
-### [GET] /archive/search?word={TEXT}
+### [GET] /search?word={TEXT}
 - 指定したワードでアーカイブを検索
 
 ### [GET] /series/{SERIES_ID}/list

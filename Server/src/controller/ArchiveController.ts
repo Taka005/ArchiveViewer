@@ -7,10 +7,13 @@ class ArchiveController extends BaseController{
   constructor(archive: Archive){
     super(archive);
 
-    this.router.get("/list",(req: Request,res: Response)=>{
-      const seriesList = archive.getAllSeries()
+    this.router.get("/",(req: Request,res: Response)=>{
+      const seriesList = archive.getAllSeries();
 
-      res.status(200).json(this.parseSeries(seriesList));
+      res.status(200).json({
+        totalCount: seriesList.length,
+        series: this.parseSeries(seriesList)
+      });
     });
 
     this.router.get("/search",(req: Request,res: Response)=>{
@@ -22,7 +25,10 @@ class ArchiveController extends BaseController{
 
       const seriesList = archive.searchSeries(word as string);
 
-      res.status(200).json(this.parseSeries(seriesList));
+      res.status(200).json({
+        totalCount: seriesList.length,
+        series: this.parseSeries(seriesList)
+      });
     });
   }
 

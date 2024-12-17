@@ -62,10 +62,6 @@ class Server{
       }
     });
 
-    this.app.get("/",(req: Request,res: Response)=>{
-      res.status(200).send("Archive Viewer");
-    });
-
     this.app.delete("/cache",(req: Request,res: Response)=>{
       if(!Config.isUseApiKey) return res.status(400).json({
         message: "APIキーの使用を有効にしていないため利用できません"
@@ -78,7 +74,7 @@ class Server{
       });
     });
 
-    this.app.use("/archive",new ArchiveController(this.archive).router);
+    this.app.use("/",new ArchiveController(this.archive).router);
     this.app.use("/series",new SeriesController(this.archive).router);
     this.app.use("/book",new BookController(this.archive).router);
 
