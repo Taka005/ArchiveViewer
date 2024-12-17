@@ -91,7 +91,7 @@ class Series{
    * シリーズのサムネイル
    */
   public async getThumbnail(): Promise<Buffer>{
-    return await this.books[0].getThumbnail();
+    return await this.getBook(1).getThumbnail();
   }
 
   /**
