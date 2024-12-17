@@ -7,7 +7,7 @@ class SeriesController extends BaseController{
   constructor(archive: Archive){
     super(archive);
 
-    this.router.get("/:seriesId/list",(req: Request,res: Response)=>{
+    this.router.get("/:seriesId",(req: Request,res: Response)=>{
       const { seriesId } = req.params;
 
       const series = archive.getSeries(seriesId);
@@ -17,7 +17,10 @@ class SeriesController extends BaseController{
 
       const books = series.getBooks();
 
-      res.status(200).json(this.parseBooks(books));
+      res.status(200).json({
+        totalCount: books.length,
+        books: this.parseBooks(books)
+      });
     });
 
     this.router.get("/:seriesId/search",(req: Request,res: Response)=>{
@@ -25,7 +28,7 @@ class SeriesController extends BaseController{
       const { word } = req.query;
 
       if(!word) return res.status(400).json({
-        message: "クエリパラメーターが不足しています"
+        message: "'word'のクエリパラメーターが不足しています"
       });
 
       const series = archive.getSeries(seriesId);
@@ -35,7 +38,10 @@ class SeriesController extends BaseController{
 
       const books = series.searchBooks(word as string);
 
-      res.status(200).json(this.parseBooks(books));
+      res.status(200).json({
+        totalCount: books.length,
+        books: this.parseBooks(books)
+      });
     });
 
     this.router.get("/:seriesId/thumbnail",async(req: Request,res: Response)=>{

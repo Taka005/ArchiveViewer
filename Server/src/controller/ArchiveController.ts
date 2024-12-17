@@ -20,7 +20,7 @@ class ArchiveController extends BaseController{
       const { word } = req.query;
 
       if(!word) return res.status(400).json({
-        message: "クエリパラメーターが不足しています"
+        message: "'word'のクエリパラメーターが不足しています"
       });
 
       const seriesList = archive.searchSeries(word as string);
