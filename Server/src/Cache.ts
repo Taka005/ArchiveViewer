@@ -15,7 +15,7 @@ class Cache{
   /**
    * キャッシュを保存します
    */
-  public static save(book: Book,page: Page,buffer: Buffer): void{
+  public static set(book: Book,page: Page,buffer: Buffer): void{
     if(!Config.isUseCache) return;
 
     fs.mkdirSync(`${Config.cachePath}/${book.id}`,{ recursive: true });

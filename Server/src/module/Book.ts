@@ -89,7 +89,7 @@ class Book{
     }else{
       const buffer: Buffer = await this.file.getData(page.path);
 
-      Cache.save(this,page,buffer);
+      Cache.set(this,page,buffer);
 
       return buffer;
     }
