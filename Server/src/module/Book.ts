@@ -1,5 +1,5 @@
 import path from "path";
-import Zip from "./Zip";
+import File from "./File";
 import Page from "./Page";
 import Utils from "../Utils";
 import Log from "../Log";
@@ -9,7 +9,7 @@ import Cache from "../Cache";
  * 書籍の管理
  */
 class Book{
-  private file: Zip;
+  private file: File;
 
   /**
    * 格納されているページの配列
@@ -43,7 +43,7 @@ class Book{
     this.id = Utils.toMd5(filePath);
     this.name = path.basename(filePath,path.extname(filePath));
 
-    this.file = new Zip(filePath);
+    this.file = new File(filePath);
 
     this.file.getEntries()
       .then(entries=>{

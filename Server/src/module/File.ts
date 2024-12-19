@@ -1,6 +1,6 @@
 import yauzl, { Entry } from "yauzl";
 
-class Zip{
+class File{
   /**
    * ファイルのパス
    */
@@ -80,4 +80,4 @@ class Zip{
   }
 }
 
-export default Zip;
+export default File;
